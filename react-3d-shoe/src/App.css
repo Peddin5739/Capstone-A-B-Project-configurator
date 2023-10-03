@@ -1,0 +1,52 @@
+/* ... (keep the previous styles as well) ... */
+
+.app-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* splits the view in half */
+  grid-template-areas: "buttons canvas"; /* buttons on the left, canvas on the right */
+  width: 100%;
+  height: 100vh;
+}
+
+.canvas-container {
+  grid-area: canvas;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.button-container {
+  grid-area: buttons;
+  overflow-y: scroll; /* Allow vertical scroll if there are many buttons */
+  display: flex;
+  flex-direction: column; /* Align the buttons vertically */
+  align-items: center;
+  padding: 20px 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  background-color: #333;
+}
+
+.button-container > div {
+  width: 90%; /* Make each button set take 90% of the width */
+  display: flex;
+  justify-content: space-between; /* Space out the name and buttons */
+  margin: 10px 0;
+  align-items: center;
+}
+
+.button-container button {
+  margin: 0 10px;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.object-name {
+  color: white;
+}
+
+/* Login Style ////////////////////////////////////////////////////////////////////////////////////// */
