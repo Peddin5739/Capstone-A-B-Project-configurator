@@ -7,6 +7,7 @@ import Watch from "./Watch";
 import "./App.css";
 import objectNames from "./mesh.jsx";
 
+//shoe
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [generatedNumber, setGeneratedNumber] = useState(1000);
