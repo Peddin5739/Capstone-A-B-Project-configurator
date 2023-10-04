@@ -5,9 +5,9 @@ import ShoeModel from "./ShoeModel";
 import Login from "./Login";
 import Watch from "./Watch";
 import "./App.css";
-import objectNames from "./mesh.jsx";
+import objectName from "./mesh.jsx";
+import watchObjects from "./Watchmesh";
 
-//shoe
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [generatedNumber, setGeneratedNumber] = useState(1000);
@@ -34,14 +34,12 @@ function App() {
     localStorage.setItem("lastGeneratedNumber", nextNumber.toString());
   }, []);
 
+  const currentObjects = showWatch ? watchObjects : objectName;
+
   if (!isLoggedIn) {
     return (
       <Login onValidate={setIsLoggedIn} generatedNumber={generatedNumber} />
     );
-  }
-
-  if (showWatch) {
-    return <Watch />;
   }
 
   return (
@@ -50,12 +48,16 @@ function App() {
         <Canvas camera={{ position: [-5, 2, 10] }}>
           <ambientLight />
           <pointLight position={[10, 10, 10]} />
-          <ShoeModel selectedColor={selectedColor} />
+          {showWatch ? (
+            <Watch selectedColor={selectedColor} />
+          ) : (
+            <ShoeModel selectedColor={selectedColor} />
+          )}
           <OrbitControls />
         </Canvas>
       </div>
       <div className="button-container">
-        {objectNames.map((name) => (
+        {currentObjects.map((name) => (
           <div key={name}>
             <span className="object-name">{name}</span>
             {Object.entries(colors).map(([colorName, hex]) => (
@@ -70,7 +72,9 @@ function App() {
           </div>
         ))}
         <div className="submit-container">
-          <button onClick={() => setShowWatch(true)}>Submit</button>
+          <button onClick={() => setShowWatch(!showWatch)}>
+            {showWatch ? "Switch to Shoe" : "Switch to Watch"}
+          </button>
         </div>
       </div>
     </div>

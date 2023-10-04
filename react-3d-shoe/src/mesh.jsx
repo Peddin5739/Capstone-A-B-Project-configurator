@@ -1,4 +1,4 @@
-const objectNames = [
+const objectName = [
   "Object_4",
   "Object_6",
   "Object_8",
@@ -48,4 +48,4 @@ const objectNames = [
   "Object_96",
   "Object_98",
 ];
-export default objectNames;
+export default objectName;
