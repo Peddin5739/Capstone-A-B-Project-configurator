@@ -1,0 +1,11 @@
+Model Information:
+* title:	Apple Watch Ultra Made In Blender (PolygonMBW)
+* source:	https://sketchfab.com/3d-models/apple-watch-ultra-made-in-blender-polygonmbw-bd089526a71c4517956c94f32a081210
+* author:	PolygonMBW (https://sketchfab.com/PolygonMBW)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Apple Watch Ultra Made In Blender (PolygonMBW)" (https://sketchfab.com/3d-models/apple-watch-ultra-made-in-blender-polygonmbw-bd089526a71c4517956c94f32a081210) by PolygonMBW (https://sketchfab.com/PolygonMBW) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

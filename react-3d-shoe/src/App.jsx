@@ -4,20 +4,41 @@ import { OrbitControls } from "@react-three/drei";
 import ShoeModel from "./ShoeModel";
 import Login from "./Login";
 import Watch from "./Watch";
+import TwoDWatch from "./2dwatch";
 import "./App.css";
-import objectName from "./mesh.jsx";
+import objectNames from "./mesh.jsx";
 import watchObjects from "./Watchmesh";
+
+function ColorPicker({ objectName, onColorSelect, availableColors }) {
+  return (
+    <div key={objectName}>
+      <span className="object-name">{objectName}</span>
+      {availableColors.map(([colorName, hex]) => (
+        <button
+          key={colorName}
+          style={{ backgroundColor: hex }}
+          onClick={() => onColorSelect(objectName, hex)}
+        >
+          {colorName}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [generatedNumber, setGeneratedNumber] = useState(1000);
   const [selectedColor, setSelectedColor] = useState({});
-  const [showWatch, setShowWatch] = useState(false);
+  const [view, setView] = useState("shoe3D");
+
   const colors = {
-    Turquoise: "#40E0D0",
-    Goldenrod: "#DAA520",
-    Hot_Pink: "#FF69B4",
-    Slate_Blue: "#6A5ACD",
+    lightGray: "#f5f0f0",
+    deepBlue: "#1e62c0",
+    burntOrange: "#f06616",
+    brightRed: "#f5341b",
+    darkGray: "#1b2120",
+    brightYellow: "#e2f026",
   };
 
   const handleColorClick = (objectName, color) => {
@@ -34,7 +55,19 @@ function App() {
     localStorage.setItem("lastGeneratedNumber", nextNumber.toString());
   }, []);
 
-  const currentObjects = showWatch ? watchObjects : objectName;
+  const nextView = () => {
+    switch (view) {
+      case "shoe3D":
+        setView("watch3D");
+        break;
+      case "watch3D":
+        setView("watch2D");
+        break;
+      default:
+        setView("shoe3D");
+        break;
+    }
+  };
 
   if (!isLoggedIn) {
     return (
@@ -44,36 +77,38 @@ function App() {
 
   return (
     <div className="app-container">
-      <div className="canvas-container">
-        <Canvas camera={{ position: [-5, 2, 10] }}>
-          <ambientLight />
-          <pointLight position={[10, 10, 10]} />
-          {showWatch ? (
-            <Watch selectedColor={selectedColor} />
-          ) : (
-            <ShoeModel selectedColor={selectedColor} />
-          )}
-          <OrbitControls />
-        </Canvas>
-      </div>
+      {view !== "watch2D" ? (
+        <div className="canvas-container">
+          <Canvas camera={{ position: [-5, 2, 10] }}>
+            <ambientLight />
+            <pointLight position={[10, 10, 10]} />
+            {view === "shoe3D" ? (
+              <ShoeModel selectedColor={selectedColor} />
+            ) : (
+              <Watch selectedColor={selectedColor} />
+            )}
+            <OrbitControls />
+          </Canvas>
+        </div>
+      ) : (
+        <TwoDWatch selectedColor={selectedColor} />
+      )}
       <div className="button-container">
-        {currentObjects.map((name) => (
-          <div key={name}>
-            <span className="object-name">{name}</span>
-            {Object.entries(colors).map(([colorName, hex]) => (
-              <button
-                key={colorName}
-                style={{ backgroundColor: hex }}
-                onClick={() => handleColorClick(name, hex)}
-              >
-                {colorName}
-              </button>
-            ))}
-          </div>
+        {(view === "shoe3D" ? objectNames : watchObjects).map((name) => (
+          <ColorPicker
+            key={name}
+            objectName={name}
+            onColorSelect={handleColorClick}
+            availableColors={Object.entries(colors)}
+          />
         ))}
         <div className="submit-container">
-          <button onClick={() => setShowWatch(!showWatch)}>
-            {showWatch ? "Switch to Shoe" : "Switch to Watch"}
+          <button onClick={nextView}>
+            {view === "shoe3D"
+              ? "Move to 3D Watch"
+              : view === "watch3D"
+              ? "Move to 2D Watch"
+              : "Switch to 3D Shoe"}
           </button>
         </div>
       </div>

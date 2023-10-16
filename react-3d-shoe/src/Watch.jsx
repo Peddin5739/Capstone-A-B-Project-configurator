@@ -6,7 +6,7 @@ const Watch = ({ selectedColor }) => {
   const watchRef = useRef();
   const gltf = useLoader(
     GLTFLoader,
-    "/roger_dubuis_lamborghini_huracan_black_by_sdc/scene.gltf"
+    "/apple_watch_ultra_made_in_blender_polygonmbw/scene.gltf"
   );
 
   useEffect(() => {
